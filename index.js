@@ -62,8 +62,18 @@ const resolvers = {
         return game
         
     },
+    editGame(_, args){
+      let game = db.games.find((game) => game.id === args.id)
+      let index = db.games.indexOf(game)
+      let editedGame = {
+        ...game,
+        ...args.edits
+      }
+      db.games[index] = editedGame
+      return editedGame
     
   }
+}
 }
 
 // server setup
